@@ -171,26 +171,26 @@ verificar_arq () {
 case $1 in
 "menu"|"message.txt")ARQ="${SCPdir}/";; #Menu
 "usercodes")ARQ="${SCPusr}/";; #User
-"openssh.sh")ARQ="${SCPinst}/";; #Instalacao
-"budp.sh")ARQ="${SCPinst}/";; #Instalacao
-"apache2.sh")ARQ="${SCPinst}/";; #Instalacao
-"squid.sh")ARQ="${SCPinst}/";; #Instalacao
-"sslh.sh")ARQ="${SCPinst}/";; #Instalacao
-"dropbear.sh")ARQ="${SCPinst}/";; #Instalacao
-"openvpn.sh")ARQ="${SCPinst}/";; #Instalacao
-"ssl.sh")ARQ="${SCPinst}/";; #Instalacao
-"shadowsocks.sh")ARQ="${SCPinst}/";; #Instalacao
-"vnc.sh")ARQ="${SCPinst}/";; #Instalacao
-"webmin.sh")ARQ="${SCPinst}/";; #Instalacao
-"v2ray.sh")ARQ="${SCPinst}/";; #Instalacao
-"sockspy.sh"|"PDirect.py"|"PPub.py"|"PPriv.py"|"POpen.py"|"PGet.py")ARQ="${SCPinst}/";; #Instalacao
-*)ARQ="${SCPfrm}/";; #Ferramentas
+"openssh.sh")ARQ="${SCPinst}/";; #Installation
+"budp.sh")ARQ="${SCPinst}/";; #Installation
+"apache2.sh")ARQ="${SCPinst}/";; #Installation
+"squid.sh")ARQ="${SCPinst}/";; #Installation
+"sslh.sh")ARQ="${SCPinst}/";; #Installation
+"dropbear.sh")ARQ="${SCPinst}/";; #Installation
+"openvpn.sh")ARQ="${SCPinst}/";; #Installation
+"ssl.sh")ARQ="${SCPinst}/";; #Installation
+"shadowsocks.sh")ARQ="${SCPinst}/";; #Installation
+"vnc.sh")ARQ="${SCPinst}/";; #Installation
+"webmin.sh")ARQ="${SCPinst}/";; #Installation
+"v2ray.sh")ARQ="${SCPinst}/";; #Installation
+"sockspy.sh"|"PDirect.py"|"PPub.py"|"PPriv.py"|"POpen.py"|"PGet.py")ARQ="${SCPinst}/";; #Installation
+*)ARQ="${SCPfrm}/";; #Tools
 esac
 mv -f ${SCPinstal}/$1 ${ARQ}/$1
 chmod +x ${ARQ}/$1
 }
 
-# Instalação NEW-ULTIMATE
+# Installation NEW-ULTIMATE
 fun_ip
 wget -O /usr/bin/trans https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/trans &> /dev/null
 clear
