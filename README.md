@@ -1,6 +1,7 @@
 ﻿# NEW-ULTIMATE
 ```
 * UPDATE 08/04/2021 - PROYECTO FINALIZADO
+* UPDATE 20/04/2021 - TRANSLATE TO ENGLISH
 ```
 ![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/blob/master/Imagenes/ADM_ULTIMATE_NEW_FREE.jpg)
 
@@ -17,7 +18,7 @@
 
 ## :book: Installation
 
-apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/instalar.sh; chmod 777 instalar.sh* && ./instalar.sh*
+apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/alfatihart/ADM-ULTIMATE-NEW-FREE/master/installer.sh; chmod 777 installer.sh* && ./installer.sh
 
 ```
 NEW-ULTIMATE (las dependencias faltantes se instalarán automáticamente)
