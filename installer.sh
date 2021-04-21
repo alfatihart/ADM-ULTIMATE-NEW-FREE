@@ -111,7 +111,7 @@ echo -e "$valor3"
 done
 msg -bar2
 unset selection
-while [[ ${selection} != @([1-8]) ]]; do
+while [[ ${selection} != @([1-9]) ]]; do
 echo -ne "\033[1;37mSELECT: " && read selection
 tput cuu1 && tput dl1
 done
