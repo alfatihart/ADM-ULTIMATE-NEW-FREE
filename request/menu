@@ -77,15 +77,15 @@ declare -A texto
 SCPidioma="${SCPdir}/idioma"
 [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
 local LINGUAGE=$(cat ${SCPidioma})
-[[ -z $LINGUAGE ]] && LINGUAGE=pt
-[[ $LINGUAGE = "pt" ]] && echo "$@" && return
+[[ -z $LINGUAGE ]] && LINGUAGE=en
+[[ $LINGUAGE = "en" ]] && echo "$@" && return
 [[ ! -e /etc/texto-adm ]] && touch /etc/texto-adm
 source /etc/texto-adm
 if [[ -z "$(echo ${texto[$@]})" ]]; then
 if [[ `echo "$@" | grep -o '*'` = "*" ]]; then
-retorno="$(source trans -e bing -b pt:${LINGUAGE} "$@"|sed -e 's/[^a-z0-9 -]//ig'| awk '{print toupper($0)}' 2>/dev/null)"
+retorno="$(source trans -e bing -b en:${LINGUAGE} "$@"|sed -e 's/[^a-z0-9 -]//ig'| awk '{print toupper($0)}' 2>/dev/null)"
 else
-retorno="$(source trans -e bing -b pt:${LINGUAGE} "$@"|sed -e 's/[^a-z0-9 -]//ig' 2>/dev/null)"
+retorno="$(source trans -e bing -b en:${LINGUAGE} "$@"|sed -e 's/[^a-z0-9 -]//ig' 2>/dev/null)"
 fi
 echo "texto[$@]='$retorno'"  >> /etc/texto-adm
 echo "$retorno"
@@ -792,7 +792,7 @@ msg -bar
 msg -ama "\033[1;31m[\033[1;32m NEW-ULTIMATE \033[1;31m] \033[1;31mIP \033[1;37m$(meu_ip) \033[1;31mUSER VPS: \033[1;37m$_total $log"
 msg -bar
 echo -ne "$(msg -verd "[0]") $(msg -verm2 ">") " && msg -bra "$(fun_trans "EXIT SCRIPT*")"
-menu_func "GERENCIAR USUARIOS*" "GERENCIAR FERRAMENTAS*" "-vd ATUALIZAR*" "-vm DESINSTALAR NEW-ULTIMATE*" "MUDAR CORES SISTEMA*" "MUDAR IDIOMA DO SCRIPT*" "-fi $AutoRun EXECUCAO AUTOMATICA*" "MENU DE INSTALACOES*"
+menu_func "MANAGE USERS*" "MANAGE TOOLS*" "-vd UPDATE*" "-vm UNINSTALL NEW-ULTIMATE*" "CHANGE SYSTEM COLORS*" "CHANGE SCRIPT LANGUAGE*" "-fi $AutoRun AUTOMATIC EXECUTION*" "INSTALLATIONS MENU*"
 msg -bar
 # FIM
 selection=$(selection_fun 8)
