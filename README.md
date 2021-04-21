@@ -18,7 +18,7 @@
 
 ## :book: Installation
 
-```shell
+```bash
 apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/alfatihart/ADM-ULTIMATE-NEW-FREE/master/installer.sh; chmod 777 installer.sh* && ./installer.sh
 ```
 
