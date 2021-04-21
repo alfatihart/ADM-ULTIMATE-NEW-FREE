@@ -1,7 +1,7 @@
 ﻿# NEW-ULTIMATE
 ```
 * UPDATE 08/04/2021 - PROYECTO FINALIZADO
-* UPDATE 20/04/2021 - TRANSLATE TO ENGLISH by **Al-Fatih Art**
+* UPDATE 20/04/2021 - TRANSLATE TO ENGLISH by Al-Fatih Art
 ```
 ![logo](https://github.com/alfatihart/ADM-ULTIMATE-NEW-FREE/blob/master/Imagenes/ADM_ULTIMATE_NEW_FREE.jpg)
 
