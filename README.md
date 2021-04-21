@@ -4,7 +4,8 @@
 * UPDATE 20/04/2021 - TRANSLATE TO ENGLISH by Al-Fatih Art
 * UPDATE 21/04/2021 - ADDED INDONESIAN LANGUAGE SUPPORT
 ```
-![logo](https://github.com/alfatihart/ADM-ULTIMATE-NEW-FREE/blob/master/Imagenes/ADM_ULTIMATE_NEW_FREE.jpg)
+![Screenshot_20210421_183705](https://user-images.githubusercontent.com/47027436/115540428-a03a3a80-a2d0-11eb-8561-00bcaeb8ac60.png)
+
 
 **Manager Script**
 
