@@ -12,7 +12,7 @@
 ## :heavy_exclamation_mark: Requirements
 
 * An operating system based on Linux (Ubuntu or Debian)
-* Recommend Debian 9 Server x86_64
+* ~~Recommend Debian 9 Server x86_64~~
 * Recommend Ubuntu 16.04 Server x86_64
 * It is recommended to use a new or formatted distro
 * If you give translation errors to execute the next command:  
