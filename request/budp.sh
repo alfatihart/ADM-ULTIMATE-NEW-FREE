@@ -12,7 +12,7 @@ if [ "$pid_badvpn" = "" ]; then
     fun_bar "sleep 1s"
     msg -bar
     if [[ ! -e /bin/badvpn-udpgw ]]; then
-    wget -O /bin/badvpn-udpgw https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/badvpn-udpgw &>/dev/null
+    wget -O /bin/badvpn-udpgw https://raw.githubusercontent.com/alfatihart/ADM-ULTIMATE-NEW-FREE/master/Install/badvpn-udpgw &>/dev/null
     chmod 777 /bin/badvpn-udpgw
     fi
     screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
