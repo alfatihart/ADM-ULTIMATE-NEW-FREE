@@ -7,7 +7,7 @@ SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 if [ "$pid_badvpn" = "" ]; then
-    msg -ama "$(fun_trans "Liberando Badvpn")"
+    msg -ama "$(fun_trans "Releasing Badvpn")"
     msg -bar
     fun_bar "sleep 1s"
     msg -bar
@@ -16,16 +16,16 @@ if [ "$pid_badvpn" = "" ]; then
     chmod 777 /bin/badvpn-udpgw
     fi
     screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Sucesso Procedimento Feito")" || msg -ama "$(fun_trans "Falhou")"
+    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Success Procedure Done")" || msg -ama "$(fun_trans "Failed")"
     msg -bar
 else
-    msg -ama "$(fun_trans "Parando Badvpn")"
+    msg -ama "$(fun_trans "Stopping Badvpn")"
     msg -bar
     fun_bar "sleep 1s"
     msg -bar
     kill -9 $(ps x | grep badvpn | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
     killall badvpn-udpgw > /dev/null 2>&1
-    [[ ! "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Sucesso Procedimento Feito")" || msg -ama "$(fun_trans "Falhou")"
+    [[ ! "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Success Procedure Done")" || msg -ama "$(fun_trans "Failed")"
     unset pid_badvpn
     msg -bar
     fi
