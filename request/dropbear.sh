@@ -29,17 +29,17 @@ fun_eth () {
 eth=$(ifconfig | grep -v inet6 | grep -v lo | grep -v 127.0.0.1 | grep "encap:Ethernet" | awk '{print $1}')
     [[ $eth != "" ]] && {
     msg -bar
-    msg -ama " $(fun_trans "Aplicar Sistema Para Melhorar Pacotes Ssh?")"
-    msg -ama " $(fun_trans "Opcao Para Usuarios Avancados")"
+    msg -ama " $(fun_trans "Apply System to Improve SSH Packages?")"
+    msg -ama " $(fun_trans "Option for Advanced Users")"
     msg -bar
     read -p " [S/N]: " -e -i n sshsn
 	tput cuu1 && tput dl1
            [[ "$sshsn" = @(s|S|y|Y) ]] && {
-           echo -e "${cor[1]} $(fun_trans "Correcao de problemas de pacotes no SSH...")"
-           echo -e " $(fun_trans "Qual A Taxa RX")"
+           echo -e "${cor[1]} $(fun_trans "Fixed SSH package issues ...")"
+           echo -e " $(fun_trans "What is the RX Rate")"
            echo -ne "[ 1 - 999999999 ]: "; read rx
            [[ "$rx" = "" ]] && rx="999999999"
-           echo -e " $(fun_trans "Qual A Taxa TX")"
+           echo -e " $(fun_trans "What is the TX Rate")"
            echo -ne "[ 1 - 999999999 ]: "; read tx
            [[ "$tx" = "" ]] && tx="999999999"
            apt-get install ethtool -y > /dev/null 2>&1
@@ -72,34 +72,34 @@ sleep 1s
 }
 fun_dropbear () {
  [[ -e /etc/default/dropbear ]] && {
- echo -e "\033[1;32m $(fun_trans "REMOVENDO DROPBEAR*")"
+ echo -e "\033[1;32m $(fun_trans "REMOVING DROPBEAR*")"
 msg -bar
  service dropbear stop > /dev/null 2>&1
  fun_bar "apt-get remove dropbear -y"
  msg -bar
- echo -e "\033[1;32m $(fun_trans "Dropbear Removido")!"
+ echo -e "\033[1;32m $(fun_trans "Dropbear Removed")!"
  msg -bar
  [[ -e /etc/default/dropbear ]] && rm /etc/default/dropbear
  return 0
  }
-echo -e "\033[1;32m $(fun_trans "INSTALADOR DROPBEAR*")ADM-ULTIMATE"
+echo -e "\033[1;32m $(fun_trans "DROPBEAR INSTALLER*")ADM-ULTIMATE"
 msg -bar
-echo -e "\033[1;31m $(fun_trans "Selecione Portas Validas em Ordem Sequencial:")\033[1;32m 22 80 81 82 85 90\033[1;37m"
+echo -e "\033[1;31m $(fun_trans "Select Valid Ports in Sequential Order:")\033[1;32m 22 80 81 82 85 90\033[1;37m"
 msg -bar
-echo -ne "\033[1;31m $(fun_trans "Digite a Porta"): \033[1;37m" && read DPORT
+echo -ne "\033[1;31m $(fun_trans "Enter the Port"): \033[1;37m" && read DPORT
 tput cuu1 && tput dl1
 TTOTAL=($DPORT)
     for((i=0; i<${#TTOTAL[@]}; i++)); do
         [[ $(mportas|grep "${TTOTAL[$i]}") = "" ]] && {
-        echo -e "\033[1;33m $(fun_trans "Porta Escolhida:")\033[1;32m ${TTOTAL[$i]} OK"
+        echo -e "\033[1;33m $(fun_trans "Chosen Port:")\033[1;32m ${TTOTAL[$i]} OK"
         PORT="$PORT ${TTOTAL[$i]}"
         } || {
-        echo -e "\033[1;33m $(fun_trans "Porta Escolhida:")\033[1;31m ${TTOTAL[$i]} FAIL"
+        echo -e "\033[1;33m $(fun_trans "Chosen Port:")\033[1;31m ${TTOTAL[$i]} FAIL"
         }
    done
   [[  -z $PORT ]] && {
   msg -bar
-  echo -e "\033[1;31m $(fun_trans "Nenhuma Porta Valida Foi Escolhida")\033[0m"
+  echo -e "\033[1;31m $(fun_trans "No valid ports were chosen")\033[0m"
   msg -bar
   return 1
   }
@@ -133,12 +133,12 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes" > /etc/ssh/sshd_config
 msg -bar
-echo -e "${cor[2]} $(fun_trans "Instalando dropbear")"
+echo -e "${cor[2]} $(fun_trans "Installing dropbear")"
 msg -bar
 fun_bar "apt-get install dropbear -y"
 msg -bar
 touch /etc/dropbear/banner
-echo -e "${cor[2]} $(fun_trans "Configurando dropbear")"
+echo -e "${cor[2]} $(fun_trans "Configuring dropbear")"
 cat <<EOF > /etc/default/dropbear
 NO_START=0
 DROPBEAR_EXTRA_ARGS="VAR"
@@ -177,12 +177,12 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes" > /etc/ssh/sshd_config
 msg -bar
-echo -e "${cor[2]} $(fun_trans "Instalando dropbear")"
+echo -e "${cor[2]} $(fun_trans "Installing dropbear")"
 echo -e "$barra"
 fun_bar "apt-get install dropbear -y"
 touch /etc/dropbear/banner
 echo -e "$barra"
-echo -e "${cor[2]} $(fun_trans "Configurando dropbear")"
+echo -e "${cor[2]} $(fun_trans "Configuring dropbear")"
 cat <<EOF > /etc/default/dropbear
 NO_START=0
 DROPBEAR_EXTRA_ARGS="VAR"
@@ -197,7 +197,7 @@ sed -i "s/VAR//g" /etc/default/dropbear
 fun_eth
 service ssh restart > /dev/null 2>&1
 service dropbear restart > /dev/null 2>&1
-echo -e "${cor[3]} $(fun_trans "Seu dropbear foi configurado com sucesso")"
+echo -e "${cor[3]} $(fun_trans "Your dropbear has been successfully configured")"
 msg -bar
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
