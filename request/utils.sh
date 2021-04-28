@@ -7,20 +7,20 @@ SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
 BadVPN () {
 pid_badvpn=$(ps x | grep badvpn | grep -v grep | awk '{print $1}')
 if [ "$pid_badvpn" = "" ]; then
-    msg -ama "$(fun_trans "Liberando Badvpn")"
+    msg -ama "$(fun_trans "Releasing Badvpn")"
     msg -bar
     if [[ ! -e /bin/badvpn-udpgw ]]; then
     wget -O /bin/badvpn-udpgw https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/ADM-ULTIMATE-NEW-FREE/master/Install/badvpn-udpgw &>/dev/null
     chmod 777 /bin/badvpn-udpgw
     fi
     screen -dmS screen /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Sucesso Procedimento Feito")" || msg -ama "$(fun_trans "Falhou")"
+    [[ "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Success Procedure Done")" || msg -ama "$(fun_trans "Failed")"
 else
-    msg -ama "$(fun_trans "Parando Badvpn")"
+    msg -ama "$(fun_trans "Stopping Badvpn")"
     msg -bar
     kill -9 $(ps x | grep badvpn | grep -v grep | awk '{print $1'}) > /dev/null 2>&1
     killall badvpn-udpgw > /dev/null 2>&1
-    [[ ! "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Sucesso Procedimento Feito")" || msg -ama "$(fun_trans "Falhou")"
+    [[ ! "$(ps x | grep badvpn | grep -v grep | awk '{print $1}')" ]] && msg -ama "$(fun_trans "Success Procedure Done")" || msg -ama "$(fun_trans "Failed")"
     unset pid_badvpn
     fi
 unset pid_badvpn
@@ -28,7 +28,7 @@ unset pid_badvpn
 TCPspeed () {
 if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]; then
 #INSTALA
-msg -ama "$(fun_trans "TCP Speed Nao Ativado, Deseja Ativar Agora")?"
+msg -ama "$(fun_trans "TCP Speed Not Enabled, Want to Enable Now")?"
 msg -bar
 while [[ ${resposta} != @(s|S|n|N|y|Y) ]]; do
 read -p " [S/N]: " -e -i s resposta
@@ -44,11 +44,11 @@ net.ipv4.tcp_wmem = 4096 16384 16777216
 net.ipv4.tcp_low_latency = 1
 net.ipv4.tcp_slow_start_after_idle = 0" >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf > /dev/null 2>&1
-msg -ama "$(fun_trans "TCP Ativo Com Sucesso")!"
-} || msg -ama "$(fun_trans "Cancelado")!"
+msg -ama "$(fun_trans "TCP Successfully Active")!"
+} || msg -ama "$(fun_trans "Canceled")!"
  else
 #REMOVE
-msg -ama "$(fun_trans "TCP Speed ja Ativado, Deseja Parar Agora")?"
+msg -ama "$(fun_trans "TCP Speed already Enabled, Want to Stop Now")?"
 msg -bar
 while [[ ${resposta} != @(s|S|n|N|y|Y) ]]; do
 read -p " [S/N]: " -e -i s resposta
@@ -64,33 +64,33 @@ net.ipv4.tcp_wmem = 4096 16384 16777216
 net.ipv4.tcp_low_latency = 1
 net.ipv4.tcp_slow_start_after_idle = 0" /etc/sysctl.conf > /tmp/syscl && mv -f /tmp/syscl /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf > /dev/null 2>&1
-msg -ama "$(fun_trans "TCP Parado Com Sucesso")!"
-} || msg -ama "$(fun_trans "Cancelado")!"
+msg -ama "$(fun_trans "TCP successfully stopped")!"
+} || msg -ama "$(fun_trans "Canceled")!"
 fi
 }
 SquidCACHE () {
-msg -ama "$(fun_trans "Squid Cache, Aplica cache no squid")"
-msg -ama "$(fun_trans "melhora a velocidade do squid")"
+msg -ama "$(fun_trans "Squid Cache, Apply cache to the squid")"
+msg -ama "$(fun_trans "improves squid speed")"
 msg -bar
 if [ -e /etc/squid/squid.conf ]; then
 squid_var="/etc/squid/squid.conf"
 elif [ -e /etc/squid3/squid.conf ]; then
 squid_var="/etc/squid3/squid.conf"
 else
-msg -ama "$(fun_trans "Seu sistema nao possui um squid")!" && return 1
+msg -ama "$(fun_trans "Your system does not have a squid")!" && return 1
 fi
 teste_cache="#CACHE DO SQUID"
 if [[ `grep -c "^$teste_cache" $squid_var` -gt 0 ]]; then
   [[ -e ${squid_var}.bakk ]] && {
-  msg -ama "$(fun_trans "Cache squid identificado, removendo")!"
+  msg -ama "$(fun_trans "Identified squid cache, removing")!"
   mv -f ${squid_var}.bakk $squid_var
-  msg -ama "$(fun_trans "cache squid removido")!"
+  msg -ama "$(fun_trans "squid cache removed")!"
   service squid restart > /dev/null 2>&1 &
   service squid3 restart > /dev/null 2>&1 &
   return 0
   }
 fi
-msg -ama "$(fun_trans "Aplicando Cache Squid")!"
+msg -ama "$(fun_trans "Applying Squid Cache")!"
 msg -bar
 _tmp="#CACHE DO SQUID\ncache_mem 200 MB\nmaximum_object_size_in_memory 32 KB\nmaximum_object_size 1024 MB\nminimum_object_size 0 KB\ncache_swap_low 90\ncache_swap_high 95"
 [[ "$squid_var" = "/etc/squid/squid.conf" ]] && _tmp+="\ncache_dir ufs /var/spool/squid 100 16 256\naccess_log /var/log/squid/access.log squid" || _tmp+="\ncache_dir ufs /var/spool/squid3 100 16 256\naccess_log /var/log/squid3/access.log squid"
@@ -99,7 +99,7 @@ while read s_squid; do
 done < $squid_var
 cp ${squid_var} ${squid_var}.bakk
 echo -e "${_tmp}" > $squid_var
-msg -ama "$(fun_trans "Cache Aplicado Com Sucesso")!"
+msg -ama "$(fun_trans "Cache Applied Successfully")!"
 service squid restart > /dev/null 2>&1 &
 service squid3 restart > /dev/null 2>&1 &
 }
@@ -121,15 +121,15 @@ block_torrent () {
  sleep 3
  }
  [[ -e /etc/torrent-adm ]] && {
- echo -e "\033[1;33m $(fun_trans "REMOVENDO TORRENT*")"
+ echo -e "\033[1;33m $(fun_trans "REMOVING TORRENT*")"
  msg -bar
  service ssh restart > /dev/null 2>&1
  service sshd restart > /dev/null 2>&1
  fun_bar "fun_fireoff"
  msg -bar
- echo -e "\033[1;32m $(fun_trans "Reinicie o Sistema Pra Concluir") (reboot)"
+ echo -e "\033[1;32m $(fun_trans "Restart the System To Finish") (reboot)"
  msg -bar
- echo -e "\033[1;33m $(fun_trans "Seu Torrent foi Removido com sucesso")!"
+ echo -e "\033[1;33m $(fun_trans "Your Torrent Has Been Removed Successfully")!"
  # msg -bar
  [[ -e /etc/torrent-adm ]] && rm /etc/torrent-adm
  return 0
@@ -157,10 +157,10 @@ fi
 }
 [[ $(iptables -h|wc -l) -lt 5 ]] && apt-get install iptables -y > /dev/null 2>-1
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)
-msg -ama "$(fun_trans "Essas configuracoes so Devem ser adicionadas")"
-msg -ama "$(fun_trans "apos a vps estar totalmente configurada!")"
+msg -ama "$(fun_trans "These settings should only be added")"
+msg -ama "$(fun_trans "after the vps is fully configured!")"
 msg -bar
-echo -e "$(fun_trans "Deseja Prosseguir?")"
+echo -e "$(fun_trans "Do you want to proceed?")"
 read -p " [S/N]: " -e -i n PROS
 [[ $PROS = @(s|S|y|Y) ]] || return 1
 fun_ip #Pega IP e armazena em uma variavel
@@ -218,7 +218,7 @@ chmod +x $arq
 service ssh restart > /dev/null 2>&1
 service sshd restart > /dev/null 2>&1
 msg -bar
-msg -ama " $(fun_trans "Seu Torrent foi Aplicado com sucesso")"
+msg -ama " $(fun_trans "Your Torrent has been successfully applied")"
 }
 on="\033[1;32mon" && off="\033[1;31moff"
 [[ $(ps x | grep badvpn | grep -v grep | awk '{print $1}') ]] && badvpn=$on || badvpn=$off
@@ -229,12 +229,12 @@ if [ -e /etc/squid/squid.conf ]; then
 elif [ -e /etc/squid3/squid.conf ]; then
 [[ `grep -c "^#CACHE DO SQUID" /etc/squid3/squid.conf` -gt 0 ]] && squid=$on || squid=$off
 fi
-msg -ama "$(fun_trans "MENU DE UTILITARIOS")"
+msg -ama "$(fun_trans "UTILITIES MENU")"
 msg -bar
-echo -ne "\033[1;32m [0] > " && msg -bra "$(fun_trans "VOLTAR")"
+echo -ne "\033[1;32m [0] > " && msg -bra "$(fun_trans "BACK")"
 echo -ne "\033[1;32m [1] > " && msg -azu "$(fun_trans "BADVPN") $badvpn"
 echo -ne "\033[1;32m [2] > " && msg -azu "$(fun_trans "TCPSPEED") $tcp"
-echo -ne "\033[1;32m [3] > " && msg -azu "$(fun_trans "CACHE DO SQUID") $squid"
+echo -ne "\033[1;32m [3] > " && msg -azu "$(fun_trans "SQUID CACHE") $squid"
 echo -ne "\033[1;32m [4] > " && msg -azu "$(fun_trans "TORRENT") $torrent"
 msg -bar
 while [[ ${arquivoonlineadm} != @(0|[1-4]) ]]; do
